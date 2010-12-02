@@ -21,7 +21,7 @@ library
         Data.Union.Type
     build-depends:
         array >= 0.3 && < 0.4,
-        mtl >= 2.0 && < 2.1,
+        mtl >= 1.1 && < 2.1,
         base >= 4 && < 5
     extensions:
         GeneralizedNewtypeDeriving
