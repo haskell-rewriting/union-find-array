@@ -1,0 +1,28 @@
+name:          union
+version:       0.0
+stability:     experimental
+maintainer:    Bertram Felgenhauer <int-e@gmx.de>
+copyright:     Copyright (c) 2010, Bertram Felgenhauer
+license:       MIT
+license-file:  LICENSE
+category:      logic
+synopsis:      term library
+description:   term library
+build-type:    Simple
+cabal-version: >= 1.4
+
+library
+    hs-source-dirs:
+        src
+    exposed-modules:
+        Data.Union
+        Data.Union.ST
+        Data.Union.Monad
+        Data.Union.Type
+    build-depends:
+        array >= 0.3 && < 0.4,
+        mtl >= 2.0 && < 2.1,
+        base >= 4 && < 5
+    extensions:
+        GeneralizedNewtypeDeriving
+        RankNTypes
