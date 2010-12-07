@@ -14,5 +14,5 @@ data Union a = Union {
     label :: Array Int a
 }
 
-newtype Node = Node Int
+newtype Node = Node { fromNode :: Int }
     deriving (Eq, Ord, Ix)

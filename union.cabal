@@ -17,8 +17,8 @@ library
     exposed-modules:
         Data.Union
         Data.Union.ST
-        Data.Union.Monad
         Data.Union.Type
+        Control.Monad.Union
     build-depends:
         array >= 0.3 && < 0.4,
         mtl >= 1.1 && < 2.1,

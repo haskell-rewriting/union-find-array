@@ -9,6 +9,7 @@ module Data.Union.ST (
     merge,
     flatten,
     size,
+    unsafeFreeze,
 ) where
 
 import qualified Data.Union.Type as U
@@ -17,8 +18,9 @@ import Prelude hiding (lookup)
 import Control.Monad.ST
 import Control.Monad
 import Control.Applicative
-import Data.Array.Base
-import Data.Array.ST
+import Data.Array.Base hiding (unsafeFreeze)
+import Data.Array.ST hiding (unsafeFreeze)
+import qualified Data.Array.Base as A (unsafeFreeze)
 
 data UnionST s a = UnionST {
     up :: STUArray s Int Int,
@@ -33,10 +35,11 @@ instance Applicative (ST s) where
     pure = return
 
 runUnionST :: (forall s. ST s (UnionST s a)) -> U.Union a
-runUnionST a = runST a' where
-    a' = do
-        u <- a
-        U.Union (size u) <$> unsafeFreeze (up u) <*> unsafeFreeze (label u)
+runUnionST a = runST $ a >>= unsafeFreeze
+
+unsafeFreeze :: UnionST s a -> ST s (U.Union a)
+unsafeFreeze u =
+    U.Union (size u) <$> A.unsafeFreeze (up u) <*> A.unsafeFreeze (label u)
 
 new :: Int -> a -> ST s (UnionST s a)
 new size def = do

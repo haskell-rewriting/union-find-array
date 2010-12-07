@@ -1,8 +1,10 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving, RankNTypes #-}
-module Data.Union.Monad (
+module Control.Monad.Union (
   UnionM,
+  Union (..),
   Node,
   run,
+  run',
   new,
   lookup,
   annotate,
@@ -10,16 +12,13 @@ module Data.Union.Monad (
 ) where
 
 import qualified Data.Union.ST as US
-import qualified Data.Union.Type (Node)
+import Data.Union.Type (Node (..), Union (..))
 
 import Prelude hiding (lookup)
 import Control.Monad.State
 import Control.Monad.ST
 import Control.Applicative
 import Control.Arrow (first)
-
-newtype Node = Node Int
-    deriving (Eq, Ord, Show)
 
 data UState s l = UState {
     next   :: !Int,
@@ -45,6 +44,13 @@ run :: UnionM l a -> a
 run a = runST $ do
     u <- US.new 1 undefined
     evalStateT (runU a) UState{ next = 0, forest = u }
+
+run' :: UnionM l a -> (Union l, a)
+run' a = runST $ do
+    u <- US.new 1 undefined
+    (a, s) <- runStateT (runU a) UState{ next = 0, forest = u }
+    f <- US.unsafeFreeze (forest s)
+    return (f, a)
 
 new :: l -> UnionM l Node
 new l = U $ do
