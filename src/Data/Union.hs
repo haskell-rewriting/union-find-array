@@ -1,3 +1,5 @@
+-- |
+-- Immutable disjoint set forests.
 module Data.Union (
     Union,
     Node (..),
@@ -11,15 +13,21 @@ import Data.Union.Type (Union, Node (..))
 import qualified Data.Union.Type as T
 import Data.Array.Base ((!))
 
-size :: Union a -> Int
+-- | Get the number of nodes in the forest.
+size :: Union l -> Int
 size = T.size
 
-lookup :: Union a -> Node -> (Node, a)
+-- | Look up the representative of a node, and its label.
+lookup :: Union l -> Node -> (Node, l)
 lookup u (Node n) = go n where
     go n | n' == n   = (Node n, T.label u ! n)
          | otherwise = go n'
       where
         n' = T.up u ! n
 
+-- | Version of 'lookup' that assumes the forest to be flattened.
+-- (cf. 'Control.Union.ST.flatten'.)
+--
+-- Do not use otherwise: It will give wrong results!
 lookupFlattened :: Union a -> Node -> (Node, a)
 lookupFlattened u (Node n) = (Node (T.up u ! n), T.label u ! n)

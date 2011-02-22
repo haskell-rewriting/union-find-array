@@ -6,8 +6,8 @@ copyright:     Copyright (c) 2010, Bertram Felgenhauer
 license:       MIT
 license-file:  LICENSE
 category:      logic
-synopsis:      term library
-description:   term library
+synopsis:      union finding implementation
+description:   disjoint set forest data structure for finding unions
 build-type:    Simple
 cabal-version: >= 1.4
 
