@@ -8,6 +8,7 @@ module Data.Union.ST (
     runUnionST,
     new,
     grow,
+    copy,
     lookup,
     annotate,
     merge,
@@ -60,14 +61,19 @@ new size def = do
     label <- newArray (0, size-1) def
     return UnionST{ up = up, rank = rank, label = label, size = size, def = def }
 
--- Copying might be helpful.
-
--- | Grow the capacity of a disjoint set forest. Shrinking is not possible
--- trying to shrink a disjoint set forest will return the same forest
+-- | Grow the capacity of a disjoint set forest. Shrinking is not possible.
+-- Trying to shrink a disjoint set forest will return the same forest
 -- unmodified.
 grow :: UnionST s l -> Int -> ST s (UnionST s l)
-grow u size' | size' < size u = return u
-grow u size' = do
+grow u size' | size' <= size u = return u
+grow u size' = grow' u size'
+
+-- | Copy a disjoint set forest.
+copy :: UnionST s l -> Int -> ST s (UnionST s l)
+copy u = grow' u (size u)
+
+grow' :: UnionST s l -> Int -> ST s (UnionST s l)
+grow' u size' = do
     up' <- newListArray (0, size'-1) [0..]
     rank' <- newArray (0, size'-1) 0
     label' <- newArray (0, size'-1) (def u)
