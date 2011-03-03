@@ -88,6 +88,8 @@ annotate :: UnionST s l -> Int -> l -> ST s ()
 annotate u i v = writeArray (label u) i v
 
 -- | Look up the representative of a given node.
+--
+-- lookup' does path compression.
 lookup' :: UnionST s l -> Int -> ST s Int
 lookup' u i = do
     i' <- readArray (up u) i
@@ -110,8 +112,8 @@ equals u a b = do
     b' <- lookup' u b
     return (a' == b')
 
--- | Merge two nodes. The passed function is used to combine labels,
--- if a merge happens.
+-- | Merge two nodes if they are in distinct equivalence classes. The
+-- passed function is used to combine labels, if a merge happens.
 merge :: UnionST s l -> (l -> l -> (l, a)) -> Int -> Int -> ST s (Maybe a)
 merge u f a b = do
     (a', va) <- lookup u a
