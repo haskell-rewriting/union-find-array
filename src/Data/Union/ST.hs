@@ -69,7 +69,7 @@ grow u size' | size' <= size u = return u
 grow u size' = grow' u size'
 
 -- | Copy a disjoint set forest.
-copy :: UnionST s l -> Int -> ST s (UnionST s l)
+copy :: UnionST s l -> ST s (UnionST s l)
 copy u = grow' u (size u)
 
 grow' :: UnionST s l -> Int -> ST s (UnionST s l)
