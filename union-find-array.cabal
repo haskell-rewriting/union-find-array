@@ -22,6 +22,7 @@ library
         Data.Union
         Data.Union.ST
         Data.Union.Type
+        Control.Monad.Union.Class
         Control.Monad.Union
     build-depends:
         array >= 0.3 && < 0.4,
@@ -30,3 +31,7 @@ library
     extensions:
         GeneralizedNewtypeDeriving
         RankNTypes
+        MultiParamTypeClasses
+        FunctionalDependencies
+        FlexibleInstances
+        UndecidableInstances
