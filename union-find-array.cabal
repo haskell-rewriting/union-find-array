@@ -1,13 +1,17 @@
-name:          union
-version:       0.0
+name:          union-find-array
+version:       0.1
 stability:     experimental
 maintainer:    Bertram Felgenhauer <int-e@gmx.de>
-copyright:     Copyright (c) 2010, Bertram Felgenhauer
+copyright:     Copyright (c) 2010-2011, Bertram Felgenhauer
 license:       MIT
 license-file:  LICENSE
-category:      logic
-synopsis:      union finding implementation
-description:   disjoint set forest data structure for finding unions
+category:      Algorithms, Data
+synopsis:      union find data structure
+description:
+    ST based implementation of Tarjan\'s disjoint set forests, using mutable
+    arrays storing indices instead of references internally. There is also
+    a pure, immutable version of the data structure, which is useful for
+    querying the result of a union find construction.
 build-type:    Simple
 cabal-version: >= 1.4
 
