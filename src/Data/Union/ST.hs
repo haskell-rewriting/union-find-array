@@ -1,4 +1,4 @@
-{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE RankNTypes, CPP #-}
 -- |
 -- Low-level interface for managing a disjoint set data structure, based on
 -- 'Control.Monad.ST'. For a higher level convenience interface, look at
@@ -36,9 +36,11 @@ data UnionST s l = UnionST {
     def :: l
 }
 
+#if __GLASGOW_HASKELL__ < 702
 instance Applicative (ST s) where
     (<*>) = ap
     pure = return
+#endif
 
 -- Use http://www.haskell.org/pipermail/libraries/2008-March/009465.html ?
 
