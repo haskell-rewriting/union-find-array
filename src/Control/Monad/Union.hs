@@ -1,3 +1,8 @@
+-- This file is part of the 'union-find-array' library. It is licensed
+-- under an MIT license. See the accompanying 'LICENSE' file for details.
+--
+-- Authors: Bertram Felgenhauer
+
 {-# LANGUAGE GeneralizedNewtypeDeriving, RankNTypes, FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 -- |

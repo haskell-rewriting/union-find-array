@@ -2,7 +2,7 @@ name:          union-find-array
 version:       0.1
 stability:     experimental
 maintainer:    Bertram Felgenhauer <int-e@gmx.de>
-copyright:     Copyright (c) 2010-2011, Bertram Felgenhauer
+copyright:     Copyright (c) 2010-2013, Bertram Felgenhauer
 license:       MIT
 license-file:  LICENSE
 category:      Algorithms, Data
@@ -12,8 +12,13 @@ description:
     arrays storing indices instead of references internally. There is also
     a pure, immutable version of the data structure, which is useful for
     querying the result of a union find construction.
+homepage:      https://github.com/haskell-rewriting/union-find-array
 build-type:    Simple
-cabal-version: >= 1.4
+cabal-version: >= 1.6
+
+source-repository head
+    type: git
+    location: git://github.com/haskell-rewriting/union-find-array
 
 library
     hs-source-dirs:
