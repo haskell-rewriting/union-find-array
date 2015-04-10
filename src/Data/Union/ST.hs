@@ -3,7 +3,7 @@
 --
 -- Authors: Bertram Felgenhauer
 
-{-# LANGUAGE RankNTypes, CPP #-}
+{-# LANGUAGE RankNTypes, CPP, FlexibleContexts #-}
 -- |
 -- Low-level interface for managing a disjoint set data structure, based on
 -- 'Control.Monad.ST'. For a higher level convenience interface, look at
