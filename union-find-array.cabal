@@ -1,5 +1,5 @@
 name:          union-find-array
-version:       0.1.0.1
+version:       0.1.0.2
 stability:     experimental
 author:        Bertram Felgenhauer
 homepage:      http://cl-informatik.uibk.ac.at/software/haskell-rewriting/
