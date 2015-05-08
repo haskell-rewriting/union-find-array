@@ -3,7 +3,7 @@
 --
 -- Authors: Bertram Felgenhauer
 
-{-# LANGUAGE RankNTypes, FlexibleContexts, CPP #-}
+{-# LANGUAGE RankNTypes, FlexibleContexts #-}
 -- |
 -- Low-level interface for managing a disjoint set data structure, based on
 -- 'Control.Monad.ST'. For a higher level convenience interface, look at
@@ -31,6 +31,7 @@ import Control.Applicative
 import Data.Array.Base hiding (unsafeFreeze)
 import Data.Array.ST hiding (unsafeFreeze)
 import qualified Data.Array.Base as A (unsafeFreeze)
+import Data.Orphans ()
 
 -- | A disjoint set forest, with nodes numbered from 0, which can carry labels.
 data UnionST s l = UnionST {
@@ -40,12 +41,6 @@ data UnionST s l = UnionST {
     size :: !Int,
     def :: l
 }
-
-#if __GLASGOW_HASKELL__ < 702
-instance Applicative (ST s) where
-    (<*>) = ap
-    pure = return
-#endif
 
 -- Use http://www.haskell.org/pipermail/libraries/2008-March/009465.html ?
 
