@@ -1,8 +1,7 @@
 name:          union-find-array
-version:       0.1.0.2
+version:       0.1.0.3
 stability:     experimental
 author:        Bertram Felgenhauer
-homepage:      http://cl-informatik.uibk.ac.at/software/haskell-rewriting/
 maintainer:    Bertram Felgenhauer <int-e@gmx.de>
 copyright:     Copyright (c) 2010-2013, Bertram Felgenhauer
 license:       MIT
@@ -16,7 +15,7 @@ description:
     querying the result of a union find construction.
 homepage:      https://github.com/haskell-rewriting/union-find-array
 build-type:    Simple
-cabal-version: >= 1.6
+cabal-version: >= 1.10
 
 source-repository head
     type: git
@@ -35,7 +34,8 @@ library
         array >= 0.3 && < 0.6,
         mtl >= 1.1 && < 2.3,
         base >= 4 && < 5
-    extensions:
+    default-language: Haskell2010
+    other-extensions:
         GeneralizedNewtypeDeriving
         RankNTypes
         MultiParamTypeClasses
