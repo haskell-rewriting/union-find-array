@@ -35,12 +35,12 @@ data UState s l = UState {
 
 -- | Union find monad.
 newtype UnionM l a = U {
-    runU :: (forall s . StateT (UState s l) (ST s) a)
+    runU :: forall s . StateT (UState s l) (ST s) a
 }
 
 instance Monad (UnionM l) where
     return x =  U (return x)
-    f >>= b = U (runU f >>= runU . b)
+    f >>= b = U (runU f >>= \v -> runU (b v))
 
 instance Functor (UnionM l) where
     fmap = liftM
@@ -50,7 +50,7 @@ instance Applicative (UnionM l) where
     (<*>) = ap
 
 instance MonadFix (UnionM l) where
-    mfix a = U (mfix (runU . a))
+    mfix a = U (mfix (\v -> runU (a v)))
 
 -- | Run a union find computation.
 run :: UnionM l a -> a
