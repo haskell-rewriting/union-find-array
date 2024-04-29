@@ -22,6 +22,7 @@ import qualified Data.Union.ST as US
 import Data.Union.Type (Node (..), Union (..))
 
 import Prelude hiding (lookup)
+import Control.Monad
 import Control.Monad.State
 import Control.Monad.ST
 import Control.Monad.Fix
