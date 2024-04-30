@@ -19,7 +19,7 @@ cabal-version: >= 1.10
 
 source-repository head
     type: git
-    location: git://github.com/haskell-rewriting/union-find-array
+    location: https://github.com/haskell-rewriting/union-find-array
 
 library
     hs-source-dirs:
