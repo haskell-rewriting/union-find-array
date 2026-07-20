@@ -40,14 +40,13 @@ newtype UnionM l a = U {
 }
 
 instance Monad (UnionM l) where
-    return x =  U (return x)
     f >>= b = U (runU f >>= \v -> runU (b v))
 
 instance Functor (UnionM l) where
     fmap = liftM
 
 instance Applicative (UnionM l) where
-    pure = return
+    pure x =  U (return x)
     (<*>) = ap
 
 instance MonadFix (UnionM l) where
