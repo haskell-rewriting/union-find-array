@@ -46,7 +46,7 @@ instance Functor (UnionM l) where
     fmap = liftM
 
 instance Applicative (UnionM l) where
-    pure x =  U (return x)
+    pure x = U (return x)
     (<*>) = ap
 
 instance MonadFix (UnionM l) where
